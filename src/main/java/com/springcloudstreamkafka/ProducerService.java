@@ -15,8 +15,8 @@ public class ProducerService
 	@Autowired
 	private Source source;
 
-	@RequestMapping("/api/greetings/{count}")
-	public void getGreetings(@PathVariable int count)
+	@RequestMapping("/api/project/{number}")
+	public void getGreetings(@PathVariable int number)
 	{
 		Project project=new Project();
 		project.setProjectLocation("Falls Church,VA");
