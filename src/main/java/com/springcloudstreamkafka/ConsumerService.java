@@ -15,14 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @EnableBinding(Sink.class)
 public class ConsumerService
 {
-	/*@StreamListener(target = Sink.INPUT, condition = "project.objectType.toString()=='ProjectObject'")
-	public void consume(Project project)
-	{
-		System.out.println("********************************  Message Received  ********************************  ");
-		System.out.println("Project Name: " + project.getProjectName());
-		System.out.println("Project Name: " + project.getProjectAddress().getStreetName());
-	}*/
-
+	//Receive Project Object
 	@StreamListener(target = Sink.INPUT, condition = "payload.messageType.toString()=='Project'")
 	@Transactional
 	public void consumeProject(String messageJson) throws JsonParseException, JsonMappingException, IOException
@@ -35,7 +28,7 @@ public class ConsumerService
 		System.out.println("Project Name: " + project.getProjectAddress().getStreetName());
 	}
 	
-	
+	//Receive Address Object
 	@StreamListener(target = Sink.INPUT, condition = "payload.messageType.toString()=='Address'")
 	@Transactional
 	public void consumeAddress(String messageJson) throws JsonParseException, JsonMappingException, IOException
