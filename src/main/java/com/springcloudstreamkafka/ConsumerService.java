@@ -1,17 +1,37 @@
 package com.springcloudstreamkafka;
 
+import java.io.IOException;
+
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.cloud.stream.messaging.Sink;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @EnableBinding(Sink.class)
 public class ConsumerService
 {
-	@StreamListener(Sink.INPUT)
+	/*@StreamListener(target = Sink.INPUT, condition = "project.objectType.toString()=='ProjectObject'")
 	public void consume(Project project)
 	{
 		System.out.println("********************************  Message Received  ********************************  ");
-		System.out.println("Project Name: "+project.getProjectName());
-	}
+		System.out.println("Project Name: " + project.getProjectName());
+		System.out.println("Project Name: " + project.getProjectAddress().getStreetName());
+	}*/
+
+	@StreamListener(target = Sink.INPUT, condition = "payload.messageType.toString()=='ProjectObject'")
+	@Transactional
+	public void retrievePaymentCommandReceived(String messageJson) throws JsonParseException, JsonMappingException, IOException
+	{
+		Message<Project> message = new ObjectMapper().readValue(messageJson, new TypeReference<Message<Project>>(){});
+		Project project = message.getPayload();
+		
+		System.out.println("********************************  Message Received  ********************************  ");
+		System.out.println("Project Name: " + project.getProjectName());
+		System.out.println("Project Name: " + project.getProjectAddress().getStreetName());
+	};
 }
