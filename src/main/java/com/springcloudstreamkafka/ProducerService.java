@@ -28,8 +28,14 @@ public class ProducerService
 		project.setProjectName("PostIT");
 		project.setProjectAddress(address);
 		
-		Message<Project> message = new Message<Project>("ProjectObject", project);
+		//Send Address Object
+		Message<Address> message = new Message<Address>("Address", address);
 	    messageSender.send(message);
+	    
+	    
+	    //Send Project Object
+	    Message<Project> message2 = new Message<Project>("Project", project);
+	    messageSender.send(message2);
 	}
 
 }

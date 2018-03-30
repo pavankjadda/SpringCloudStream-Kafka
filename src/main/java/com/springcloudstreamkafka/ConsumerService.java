@@ -23,15 +23,28 @@ public class ConsumerService
 		System.out.println("Project Name: " + project.getProjectAddress().getStreetName());
 	}*/
 
-	@StreamListener(target = Sink.INPUT, condition = "payload.messageType.toString()=='ProjectObject'")
+	@StreamListener(target = Sink.INPUT, condition = "payload.messageType.toString()=='Project'")
 	@Transactional
-	public void retrievePaymentCommandReceived(String messageJson) throws JsonParseException, JsonMappingException, IOException
+	public void consumeProject(String messageJson) throws JsonParseException, JsonMappingException, IOException
 	{
 		Message<Project> message = new ObjectMapper().readValue(messageJson, new TypeReference<Message<Project>>(){});
 		Project project = message.getPayload();
 		
-		System.out.println("********************************  Message Received  ********************************  ");
+		System.out.println("********************************  Project Message Received  ********************************  ");
 		System.out.println("Project Name: " + project.getProjectName());
 		System.out.println("Project Name: " + project.getProjectAddress().getStreetName());
-	};
+	}
+	
+	
+	@StreamListener(target = Sink.INPUT, condition = "payload.messageType.toString()=='Address'")
+	@Transactional
+	public void consumeAddress(String messageJson) throws JsonParseException, JsonMappingException, IOException
+	{
+		Message<Address> message = new ObjectMapper().readValue(messageJson, new TypeReference<Message<Address>>(){});
+		Address address = message.getPayload();
+		
+		System.out.println("******************************** Address Message Received  ********************************  ");
+		System.out.println("Address Street: " + address.getStreetName());
+		System.out.println("Address City: " + address.getCity());
+	}
 }

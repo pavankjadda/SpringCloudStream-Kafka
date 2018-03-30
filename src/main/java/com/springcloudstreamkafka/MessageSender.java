@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.integration.support.MessageBuilder;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,8 +14,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class MessageSender 
 {
   
-  @Autowired
-  private Source source; 
+	@Autowired
+	private MessageChannel output;  
   
   public void send(Message<?> m) 
   {
@@ -25,7 +26,7 @@ public class MessageSender
       String jsonMessage = mapper.writeValueAsString(m);
       
       // wrap into a proper message for the transport (Kafka/Rabbit) and send it      
-      source.output().send(MessageBuilder.withPayload(jsonMessage).build());
+      output.send(MessageBuilder.withPayload(jsonMessage).build());
     } 
     
     catch (Exception e) 
