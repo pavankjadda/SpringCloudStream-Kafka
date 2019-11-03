@@ -35,10 +35,12 @@ public class ProducerService
 
 		//Send Address Object
 		Message<Address> message = new Message<>("Address", address);
+		message.setMessageType("address");
 		messageSender.send(message);
 
 		//Send Project Object
 		Message<Project> message2 = new Message<>("Project", project);
+		message.setMessageType("project");
 		messageSender.send(message2);
 	}
 
