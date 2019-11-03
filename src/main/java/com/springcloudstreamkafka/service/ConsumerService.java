@@ -17,7 +17,7 @@ import java.io.IOException;
 @EnableBinding(Sink.class)
 public class ConsumerService
 {
-	private final Logger logger= LoggerFactory.getLogger(MessageSender.class);
+	private final Logger logger= LoggerFactory.getLogger(getClass());
 
 	//Receive Project Object
 	@StreamListener(target = Sink.INPUT, condition = "payload.messageType.toString()=='Project'")

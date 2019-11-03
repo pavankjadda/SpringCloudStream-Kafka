@@ -11,7 +11,7 @@ public class Message<T>
 	private String messageType;
 	private String id = UUID.randomUUID().toString(); // unique id of this
 	private String traceId = UUID.randomUUID().toString(); // trace id, default:
-	private String sender = "Checkout";
+	private String sender = "Admin";
 	private Date timestamp = new Date();
 	private String correlationId; // id which can be used for correlation later
 
