@@ -8,7 +8,14 @@ This repository demonstrates Kafka with the help of Spring Cloud Stream
 ## How to Run?
 1. Download and install Kafka either from [Confluent](https://docs.confluent.io/current/installation/installing_cp.html#zip-and-tar-archives) or follow instructions [from here](https://www.tutorialspoint.com/apache_kafka/apache_kafka_installation_steps.htm) first. I recommend [Confluent](https://docs.confluent.io/current/installation/installing_cp.html#zip-and-tar-archives) as it combines all the servers into one package with additional tools.
    start kafka with the following command
+2. Unzip the zip file and navigate to it
+3. Start the zookeeper using following command
     ```
-    <path-to-confluent>/bin/confluent start
+    <path-to-confluent>/bin/zookeeper-server-start <path-to-confluent>/etc/kafka/zookeeper.properties
     ```
-2. Clone this repository and open in IntelliJ or Eclipse as maven project and run `KafkaStreamApplication` class. This will bring up producer class.
+4. Start the kafka using the following command
+    ```
+    <path-to-confluent>/bin/kafka-server-start <path-to-confluent>/etc/kafka/server.properties
+    
+    ```
+2. Clone this repository and open in IntelliJ or Eclipse as maven project and run `SpringCloudStreamKafkaApplication` class. This will bring up producer class.

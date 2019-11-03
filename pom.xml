@@ -38,8 +38,8 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-kafka</artifactId>
-            <version>${spring-cloud-stream.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -61,6 +61,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
