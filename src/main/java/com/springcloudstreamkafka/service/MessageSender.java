@@ -26,11 +26,11 @@ public class MessageSender
 	{
 		try
 		{
-			// avoid too much magic and transform ourselves
+			// Avoid too much magic and transform ourselves
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonMessage = mapper.writeValueAsString(m);
 
-			// wrap into a proper message for the transport (Kafka/Rabbit) and send it
+			// Wrap into a proper message for the transport (Kafka/Rabbit) and send it
 			output.send(MessageBuilder.withPayload(jsonMessage).build());
 		}
 

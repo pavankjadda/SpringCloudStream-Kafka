@@ -12,10 +12,4 @@ public class Address
 	private Long zipCode;
 	private String state;
 	private String country;
-
-	public Address()
-	{
-		super();
-		id = 0L;
-	}
 }
